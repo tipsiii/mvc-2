@@ -22,7 +22,7 @@ app.get('/', async (req,res) => {
     res.send('My MVC App');
 })
 
-app.get('/:id', async (req, res) => {
+app.get('/products/:id', async (req, res) => {
     try {
         const id = req.params.id;
         const product = await Product.findById(id);     
