@@ -13,32 +13,10 @@ app.engine('handlebars', exphbs.engine({
 app.set('view engine', 'handlebars');
 
 // Connect to MongoDB Atlas database. Note the use of .env variables here. 
-const dbURI = 'mongodb+srv://'+ process.env.DBUSER +':'+ process.env.DBPASSWD +''+ process.env.CLUSTER +'.mongodb.net/'+ process.env.DB +'?retryWrites=true&w=majority'
- 
-mongoose.connect(dbURI); // without error handling
+// moved to routes\products.js
 
-const Product = require('./models/Product');
-
-app.get('/', async (req,res) => {
-    res.send('My MVC App');
-})
-
-app.get('/products/:id', async (req, res) => {
-    try {
-        const id = req.params.id;
-        const product = await Product.findById(id);     
-        res.render('index', {
-            // Convert the product object to JSON for security reasons
-            product : product.toJSON()
-        });
-    }
-    catch(err) {
-        res.status(404).json({
-            msg: "not found"
-        })   
-    }  
-});
-
+// Link to the routes folder
+app.use('', require('./routes/products.js'));
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`App listening to port ${PORT}`));
