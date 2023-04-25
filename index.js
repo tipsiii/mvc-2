@@ -20,3 +20,5 @@ app.use('', require('./routes/products.js'));
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`App listening to port ${PORT}`));
+
+// Publish to HEROKU, cyclic or other hosting service
